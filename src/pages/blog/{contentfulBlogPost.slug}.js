@@ -1,12 +1,26 @@
 import * as React from 'react';
 import Layout from '../../components/layout';
 import { Link, graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 
 const BlogPost = ({ data }) => {
+  const options = {
+    renderNode: {
+      'embedded-asset-block': (node) => {
+        const { gatsbyImageData } = node.data.target;
+        if (!gatsbyImageData) {
+          // asset is not an image
+          return null;
+        }
+        return <GatsbyImage image={gatsbyImageData} />;
+      },
+    },
+  };
+
   return (
     <Layout pageTitle={data.contentfulBlogPost.title}>
-      {renderRichText(data.contentfulBlogPost.body)}
+      {renderRichText(data.contentfulBlogPost.body, options)}
       <Link to="/blog">Return to Blog</Link>
     </Layout>
   );
@@ -22,6 +36,13 @@ export const query = graphql`
       title
       body {
         raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            gatsbyImageData
+          }
+        }
       }
     }
   }

@@ -27,9 +27,6 @@ export const query = graphql`
   query {
     allContentfulBlogPost(sort: { fields: createdAt, order: DESC }) {
       nodes {
-        body {
-          raw
-        }
         id
         slug
         title
