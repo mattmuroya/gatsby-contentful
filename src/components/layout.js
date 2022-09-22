@@ -1,21 +1,37 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
 
+import * as styles from './layout.module.css';
+
 const Layout = ({ pageTitle, children }) => {
   return (
-    <div>
-      <nav>
-        <ul>
+    <div className={styles.container}>
+      <nav className={styles.nav}>
+        <ul className={styles.navList}>
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              to="/"
+              className={styles.navLink}
+              activeClassName={styles.active}
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/blog">Blog</Link>
+            <Link
+              to="/blog"
+              className={styles.navLink}
+              activeClassName={styles.active}
+            >
+              Blog
+            </Link>
           </li>
         </ul>
       </nav>
-      <h1>{pageTitle}</h1>
-      {children}
+      <main>
+        {pageTitle && <h1>{pageTitle}</h1>}
+        {children}
+      </main>
     </div>
   );
 };

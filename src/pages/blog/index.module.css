@@ -1,0 +1,23 @@
+.blog-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.blog-post-date {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.blog-post-link {
+  text-decoration: none;
+}
+
+.blog-post-link > h2 {
+  margin-top: 0;
+}
+
+.blog-post-link > h2:hover {
+  text-decoration: underline;
+}
